@@ -5,7 +5,7 @@ class UsersController < ApplicationController
 
         if @user.save
             # will need to redirect_to :show
-            render json: @user
+            redirect_to user_url(@user)
         else
             render :new
         end
@@ -18,7 +18,8 @@ class UsersController < ApplicationController
     end
 
     def show
-        
+        @user = User.find(params[:id])
+        render :show
     end
 
     private
