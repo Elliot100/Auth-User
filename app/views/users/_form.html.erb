@@ -1,0 +1,40 @@
+
+<% action_url = user.persisted? ? user_url : users_url %>
+<% form_method = user.persisted? ? "patch" : "post" %>
+<% submit_text = user.persisted? ? "update user" : "create user" %>
+
+<form action="<%= action_url %>" method="post">
+<input type="hidden" name="_method" value="<%= form_method %>">
+
+    <input type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>" >
+
+    <label for="user_username">User Name: </label>
+    <input type="text" 
+    name="user[username]" 
+    id="user_username"
+    value="<%= user.username %>"
+    >
+
+    <br>
+
+    <label for="user_password">New Password</label>
+    <input type="text" 
+    name="user[password]" 
+    id="user_password"
+    value="<%= user.password %>"
+    >
+
+    <br>
+
+    <input type="submit" value="<%= submit_text %>">
+
+    <br>
+
+    <% flash.now[:errors].try(:each) do |msg| %>
+    <%= msg %>
+    <% end %>
+
+
+</form>

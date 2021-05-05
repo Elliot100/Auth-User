@@ -7,6 +7,7 @@ class UsersController < ApplicationController
             # will need to redirect_to :show
             redirect_to user_url(@user)
         else
+            flash.now[:errors] = @user.errors.full_messages
             render :new
         end
     end
