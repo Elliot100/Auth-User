@@ -5,6 +5,7 @@ class UsersController < ApplicationController
 
         if @user.save
             # will need to redirect_to :show
+            log_in!(@user)
             redirect_to user_url(@user)
         else
             flash.now[:errors] = @user.errors.full_messages
@@ -19,7 +20,12 @@ class UsersController < ApplicationController
     end
 
     def show
-        @user = User.find(params[:id])
+        if current_user.nil?
+            redirect_to :new
+            return
+        end
+
+        @user = current_user
         render :show
     end
 
