@@ -4,5 +4,18 @@
     <li>your password is: <%= @user.password_digest %></li>
 </ul>
 
+<p>current counter: <%= @user.counter %></p>
 
+<form action="<%= user_counter_url(@user) %>" method="post">
+    <input type="hidden" name="_method" value="patch">
+
+    <input type="hidden"
+    name="authenticity_token"
+    value="<%= form_authenticity_token %>">
+
+    <label for="user_counter">new counter: </label>
+    <input type="number" name="user[counter]" id="user_counter">
+
+    <input type="submit" value="confirm">
+</form>
 
