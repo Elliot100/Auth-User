@@ -11,21 +11,12 @@
   </head>
 
   <body>
-    <% if !current_user.nil? %>
-      <ul>
-        <li>logged in as <%= current_user.username %></li>
-        <li>
-          <form action="<%= session_url(current_user) %>" method="post">  
-            <input type="hidden" name="_method" value="delete">
-
-            <input type="hidden"
-            name="authenticity_token"
-            value=<%= form_authenticity_token %>>
-
-            <input type="submit" value="log out">        
-          </form>
-        </li> 
-      </ul>
+    <% if current_user.nil? %>
+      <%= link_to "sign in", new_session_url %>
+      <%= link_to "sign up", new_user_url %>
+    <% else %>
+      <h1>signed in as: <%= current_user.username %> </h1>
+      <%= button_to "log out", session_url(current_user), method: :delete %>
     <% end %>
 
     <%= yield %>
