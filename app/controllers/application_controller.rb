@@ -13,11 +13,17 @@ class ApplicationController < ActionController::Base
     end
 
     def log_out!
+        current_user.try(:reset_session_token!)
         self.session[:session_token] = nil
     end
 
     def current_user
         return nil if self.session[:session_token].nil?
         @current_user ||= User.find_by(session_token: self.session[:session_token] )
+    end
+
+    # making every page pricate
+    def require_current_user!
+        redirect_to new_session_url if current_user.nil?
     end
 end

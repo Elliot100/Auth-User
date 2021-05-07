@@ -4,4 +4,7 @@ Rails.application.routes.draw do
   resources :users, only: [:create, :new, :show]
 
   resources :sessions, only: [:create, :new, :destroy]
+
+  root to: redirect("/sessions/new")
+
 end

@@ -1,4 +1,5 @@
 class UsersController < ApplicationController
+    before_action :require_current_user!, except: [:create, :new]
 
     def create
         @user = User.new(user_params)
@@ -21,7 +22,7 @@ class UsersController < ApplicationController
 
     def show
         if current_user.nil?
-            redirect_to :new
+            redirect_to new_user_url
             return
         end
 

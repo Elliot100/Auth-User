@@ -32,6 +32,9 @@
 
     <br>
 
+    <%#= button_to "sign in", new_session_url %>
+    <a href="<%= new_session_url %>">sign in</a>
+
     <% flash.now[:errors].try(:each) do |msg| %>
     <%= msg %>
     <% end %>
